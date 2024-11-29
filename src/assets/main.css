@@ -1,4 +1,9 @@
 @import './base.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
+:root {
+  --fonte-principal: "Source Sans 3", sans-serif;
+}
 
 *,
 *::before,
@@ -10,8 +15,8 @@
 body {
   min-height: 100vh;
   line-height: 1.6;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: var(--fonte-principal);
+  color: var(--vt-c-white);
   font-size: 15px;
   text-rendering: optimizeLegibility;
 }

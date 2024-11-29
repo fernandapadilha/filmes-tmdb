@@ -8,6 +8,7 @@ export const useGenreStore = defineStore('genre', () => {
   });
 
   const genres = computed(() => state.genres);
+  
   const getGenreName = (id) =>
     state.genres.find((genre) => genre.id === id).name;
 
@@ -15,16 +16,6 @@ export const useGenreStore = defineStore('genre', () => {
     const response = await api.get(`genre/${type}/list?language=pt-BR`);
     state.genres = response.data.genres;
   };
-
-  // function pegarModeloPorId(id) {
-  //   // Modelo universal
-  //   for (let tvShow of modelos.value) {
-  //     if (tvShow.id == id) {
-  //       return tvShow
-  //     }
-  //   }
-  //   return {}
-  // }
 
   return { genres, getAllGenres, getGenreName };
 });
