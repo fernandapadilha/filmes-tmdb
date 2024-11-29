@@ -16,5 +16,15 @@ export const useGenreStore = defineStore('genre', () => {
     state.genres = response.data.genres;
   };
 
+  // function pegarModeloPorId(id) {
+  //   // Modelo universal
+  //   for (let tvShow of modelos.value) {
+  //     if (tvShow.id == id) {
+  //       return tvShow
+  //     }
+  //   }
+  //   return {}
+  // }
+
   return { genres, getAllGenres, getGenreName };
 });

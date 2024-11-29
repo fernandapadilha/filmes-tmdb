@@ -16,6 +16,12 @@ const routes = [
     name: 'TV',
     component: () => import('../views/TvView.vue'),
   },
+  {
+    path: '/tv/:id',
+    name: 'tv',
+    component: () => import('../views/TvShow.vue'),
+    props: true
+  }
 ];
 
 const router = createRouter({
