@@ -37,61 +37,72 @@ const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR');
 
 <template>
     <h1>Programas de TV</h1>
-    <ul class="genre-list">
-      <li v-for="genre in genreStore.genres" :key="genre.id" @click="listTvShows(genre.id)" class="genre-item">
-        {{ genre.name }} 
-      </li>
-    </ul>
+    
+    <main class="corpo">
+      <ul class="genre-list">
+        <li v-for="genre in genreStore.genres" :key="genre.id" @click="listTvShows(genre.id)" class="genre-item">
+          {{ genre.name }} 
+        </li>
+      </ul>
 
-    {{ tvDetails }}
+      <loading v-model:active="isLoading" is-full-page />
 
-    <loading v-model:active="isLoading" is-full-page />
-
-    <div class="tv-list">
-      <div v-for="tvShow in tvShows" :key="tvShow.id" class="tv-card">
-              
-        <img :src="`https://image.tmdb.org/t/p/w500${tvShow.poster_path}`" :alt="tvShow.title" />
-        <div class="tv-details">
-          <p class="tv-title" @click="visualizar(tvShow.id)">{{ tvShow.name }}</p>
-          <p class="tv-release-date">{{ formatDate(tvShow.first_air_date) }}</p>
-          <p class="tv-genres">
-            <span v-for="genre_id in tvShow.genre_ids" :key="genre_id" @click="listTvShows(genre_id)">
-              {{ genreStore.getGenreName(genre_id) }}
-            </span>
-          </p>
+      <div class="tv-list">
+        <div v-for="tvShow in tvShows" :key="tvShow.id" class="tv-card">
+                
+          <img @click="visualizar(tvShow.id)" :src="`https://image.tmdb.org/t/p/w500${tvShow.poster_path}`" :alt="tvShow.title" />
+          <div class="tv-details">
+            <p @click="visualizar(tvShow.id)" class="tv-title">{{ tvShow.name }}</p>
+            <p>{{ formatDate(tvShow.first_air_date) }}</p>
+            <p class="tv-genres">
+              <span v-for="genre_id in tvShow.genre_ids" :key="genre_id" @click="listTvShows(genre_id)">
+                {{ genreStore.getGenreName(genre_id) }}
+              </span>
+            </p>
+          </div>
+                
         </div>
-              
       </div>
-    </div>
+    </main>
+    
 </template>
   
-  <style scoped>
+<style scoped>
+h1 {
+  margin: 1rem 0 0 1rem;
+}
+
+.corpo {
+  display: grid;
+  grid-template-columns: 1fr 11fr;
+}
+
 .genre-list {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
+  flex-direction: column;
+  row-gap: .5rem;
   list-style: none;
-  padding: 0;
+  margin-top: 5rem;
 }
 
 .genre-item {
-  background-color: #387250;
-  border-radius: 1rem;
+  background-color: var(--cor-azul);
+  border-radius: 10px;
   padding: 0.5rem 1rem;
-  color: #fff;
+  color: var(--vt-c-white);
 }
 
 .genre-item:hover {
   cursor: pointer;
-  background-color: #4e9e5f;
-  box-shadow: 0 0 0.5rem #387250;
+  filter: grayscale(60%);
 }
 
 .tv-list {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  justify-content: center;
+  margin: 5rem 0;
 }
 
 .tv-card {
@@ -105,8 +116,8 @@ const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR');
 .tv-card img {
   width: 100%;
   height: 20rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 0.5rem #000;
+  border-radius: 0.5rem 0.5rem 0 0;
+  cursor: pointer;
 }
 
 .tv-details {
@@ -116,8 +127,9 @@ const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR');
 .tv-title {
   font-size: 1.1rem;
   font-weight: bold;
-  line-height: 1.3rem;
-  height: 3.2rem;
+  line-height: normal;
+  margin: .5rem 0;
+  cursor: pointer;
 }   
 
 .tv-genres {
@@ -127,20 +139,20 @@ const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR');
   align-items: flex-start;
   justify-content: center;
   gap: 0.2rem;
+  margin-top: .5rem;
 }
 
 .tv-genres span {
-  background-color: #748708;
+  background-color: var(--cor-azul);
   border-radius: 0.5rem;
   padding: 0.2rem 0.5rem;
-  color: #fff;
+  color: var(--vt-c-white);
   font-size: 0.8rem;
   font-weight: bold;
 }
 
 .tv-genres span:hover {
   cursor: pointer;
-  background-color: #455a08;
-  box-shadow: 0 0 0.5rem #748708;
+  filter: grayscale(60%);
 }
-  </style>
+</style>

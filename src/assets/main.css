@@ -3,6 +3,8 @@
 
 :root {
   --fonte-principal: "Source Sans 3", sans-serif;
+  --cor-verde: RGB(33, 208, 122);
+  --cor-azul: RGB(21, 133, 181);
 }
 
 *,
